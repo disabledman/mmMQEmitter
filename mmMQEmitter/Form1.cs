@@ -188,12 +188,16 @@ namespace mmMQEmitter
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
+            if (m_bIsMQConnect) return;
+
             m_bIsMQConnect = _MQInit();
             _Log($"MQ Connect {(m_bIsMQConnect == true ? "Ok" : "Failed")}");
         }
 
         private void buttonDisconnect_Click(object sender, EventArgs e)
         {
+            if (!m_bIsMQConnect) return;
+
             _MQDestroy();
             _Log("MQ  Destroy");
             m_bIsMQConnect = false;

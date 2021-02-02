@@ -253,14 +253,14 @@ namespace mmMQEmitter
             this.groupBox3.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox3.Size = new System.Drawing.Size(1099, 210);
+            this.groupBox3.Size = new System.Drawing.Size(1099, 180);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Send";
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(941, 155);
+            this.buttonStop.Location = new System.Drawing.Point(941, 126);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(114, 47);
             this.buttonStop.TabIndex = 5;
@@ -270,7 +270,7 @@ namespace mmMQEmitter
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(804, 155);
+            this.buttonStart.Location = new System.Drawing.Point(804, 126);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(114, 47);
             this.buttonStart.TabIndex = 4;
@@ -327,9 +327,9 @@ namespace mmMQEmitter
             // 
             this.listBoxLog.FormattingEnabled = true;
             this.listBoxLog.ItemHeight = 20;
-            this.listBoxLog.Location = new System.Drawing.Point(12, 421);
+            this.listBoxLog.Location = new System.Drawing.Point(14, 391);
             this.listBoxLog.Name = "listBoxLog";
-            this.listBoxLog.Size = new System.Drawing.Size(1105, 384);
+            this.listBoxLog.Size = new System.Drawing.Size(1105, 424);
             this.listBoxLog.TabIndex = 3;
             // 
             // timer1
@@ -346,8 +346,10 @@ namespace mmMQEmitter
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MQ Emitter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
