@@ -58,6 +58,7 @@ namespace mmMQEmitter
             this.label7 = new System.Windows.Forms.Label();
             this.listBoxLog = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonQueneNameExchange = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -133,6 +134,7 @@ namespace mmMQEmitter
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonQueneNameExchange);
             this.groupBox2.Controls.Add(this.buttonDisconnect);
             this.groupBox2.Controls.Add(this.buttonConnect);
             this.groupBox2.Controls.Add(this.textBoxRouteKey);
@@ -181,7 +183,7 @@ namespace mmMQEmitter
             // 
             // textBoxOutQuene
             // 
-            this.textBoxOutQuene.Location = new System.Drawing.Point(96, 65);
+            this.textBoxOutQuene.Location = new System.Drawing.Point(96, 98);
             this.textBoxOutQuene.Name = "textBoxOutQuene";
             this.textBoxOutQuene.Size = new System.Drawing.Size(240, 29);
             this.textBoxOutQuene.TabIndex = 1;
@@ -199,7 +201,7 @@ namespace mmMQEmitter
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 68);
+            this.label4.Location = new System.Drawing.Point(15, 101);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 20);
@@ -336,6 +338,16 @@ namespace mmMQEmitter
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // buttonQueneNameExchange
+            // 
+            this.buttonQueneNameExchange.Location = new System.Drawing.Point(169, 65);
+            this.buttonQueneNameExchange.Name = "buttonQueneNameExchange";
+            this.buttonQueneNameExchange.Size = new System.Drawing.Size(92, 28);
+            this.buttonQueneNameExchange.TabIndex = 6;
+            this.buttonQueneNameExchange.Text = "Exchange";
+            this.buttonQueneNameExchange.UseVisualStyleBackColor = true;
+            this.buttonQueneNameExchange.Click += new System.EventHandler(this.buttonQueneNameExchange_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -393,6 +405,7 @@ namespace mmMQEmitter
         private System.Windows.Forms.TextBox textBoxExchange;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button buttonQueneNameExchange;
     }
 }
 

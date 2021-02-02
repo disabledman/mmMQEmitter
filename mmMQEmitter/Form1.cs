@@ -35,7 +35,7 @@ namespace mmMQEmitter
             textBoxInQuene.Text = "MQ.SocketEap";
             textBoxAccount.Text = "guest";
             textBoxPassword.Text = "guest";
-            textBoxServer.Text = "10.1.1.23";// "127.0.0.1";
+            textBoxServer.Text = "127.0.0.1";
             textBoxExchange.Text = "topic";
             textBoxRouteKey.Text = "#";
 
@@ -207,6 +207,22 @@ namespace mmMQEmitter
         private void timer1_Tick(object sender, EventArgs e)
         {
             _SendBody();
+        }
+
+        private void buttonQueneNameExchange_Click(object sender, EventArgs e)
+        {
+            if(m_bIsMQConnect)
+            {
+                buttonDisconnect_Click(this, null);
+
+                _Log("The exist MQ connection will close while quene name exchanged.");
+            }
+
+            //
+            var n = textBoxInQuene.Text;
+
+            textBoxInQuene.Text = textBoxOutQuene.Text;
+            textBoxOutQuene.Text = n;
         }
     }
 }
