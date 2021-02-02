@@ -64,6 +64,7 @@ namespace mmMQEmitter
 
             if (interval == 0)
             {
+                _SendBody();
                 _Log("Send Body one time only.");
                 return;
             }
