@@ -38,6 +38,7 @@ namespace mmMQEmitter
             this.textBoxAccount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonQueneNameExchange = new System.Windows.Forms.Button();
             this.buttonDisconnect = new System.Windows.Forms.Button();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.textBoxRouteKey = new System.Windows.Forms.TextBox();
@@ -58,7 +59,6 @@ namespace mmMQEmitter
             this.label7 = new System.Windows.Forms.Label();
             this.listBoxLog = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.buttonQueneNameExchange = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -153,6 +153,16 @@ namespace mmMQEmitter
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Quene Config";
+            // 
+            // buttonQueneNameExchange
+            // 
+            this.buttonQueneNameExchange.Location = new System.Drawing.Point(169, 65);
+            this.buttonQueneNameExchange.Name = "buttonQueneNameExchange";
+            this.buttonQueneNameExchange.Size = new System.Drawing.Size(92, 28);
+            this.buttonQueneNameExchange.TabIndex = 6;
+            this.buttonQueneNameExchange.Text = "Exchange";
+            this.buttonQueneNameExchange.UseVisualStyleBackColor = true;
+            this.buttonQueneNameExchange.Click += new System.EventHandler(this.buttonQueneNameExchange_Click);
             // 
             // buttonDisconnect
             // 
@@ -333,20 +343,11 @@ namespace mmMQEmitter
             this.listBoxLog.Name = "listBoxLog";
             this.listBoxLog.Size = new System.Drawing.Size(1105, 424);
             this.listBoxLog.TabIndex = 3;
+            this.listBoxLog.SelectedIndexChanged += new System.EventHandler(this.listBoxLog_SelectedIndexChanged);
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // buttonQueneNameExchange
-            // 
-            this.buttonQueneNameExchange.Location = new System.Drawing.Point(169, 65);
-            this.buttonQueneNameExchange.Name = "buttonQueneNameExchange";
-            this.buttonQueneNameExchange.Size = new System.Drawing.Size(92, 28);
-            this.buttonQueneNameExchange.TabIndex = 6;
-            this.buttonQueneNameExchange.Text = "Exchange";
-            this.buttonQueneNameExchange.UseVisualStyleBackColor = true;
-            this.buttonQueneNameExchange.Click += new System.EventHandler(this.buttonQueneNameExchange_Click);
             // 
             // Form1
             // 

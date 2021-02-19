@@ -36,8 +36,8 @@ namespace mmMQEmitter
             textBoxAccount.Text = "guest";
             textBoxPassword.Text = "guest";
             textBoxServer.Text = "127.0.0.1";
-            textBoxExchange.Text = "topic";
-            textBoxRouteKey.Text = "#";
+            textBoxExchange.Text = "mm";// "topic";
+            textBoxRouteKey.Text = "a.b.c";
 
             textBoxBody.Text = "HELLO";
 
@@ -75,21 +75,6 @@ namespace mmMQEmitter
         }
 
         //
-        private void _SendBody()
-        {
-            if (m_bIsMQConnect == false) return;
-
-            var body = Encoding.UTF8.GetBytes(textBoxBody.Text);
-
-            m_OutChannel.BasicPublish(exchange: textBoxExchange.Text,
-                                     routingKey: textBoxRouteKey.Text,
-                                     basicProperties: null,
-                                     body: body);
-
-            _Log("Send body");
-        }
-
-        //
         private void buttonStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -111,17 +96,23 @@ namespace mmMQEmitter
 
                 m_Connection = m_Factory.CreateConnection();
 
+                //
                 m_OutChannel = m_Connection.CreateModel();
-                m_OutChannel.ExchangeDeclare(textBoxExchange.Text, ExchangeType.Direct);
-                m_OutChannel.QueueDeclare($"{textBoxOutQuene.Text}", true, false, false, null);
-                m_OutChannel.QueueBind($"{textBoxOutQuene.Text}", textBoxExchange.Text, textBoxRouteKey.Text, null);
+                m_OutChannel.QueueDeclare(textBoxOutQuene.Text, true, false, false, null);
+
+                m_OutChannel.ExchangeDeclare(textBoxExchange.Text, ExchangeType.Topic);
+                //m_OutChannel.QueueBind(textBoxOutQuene.Text, textBoxExchange.Text, textBoxRouteKey.Text, null);
 
                 //
                 m_InChannel = m_Connection.CreateModel();
                 m_InChannel.QueueDeclare(textBoxInQuene.Text, true, false, false, null);
 
+                m_InChannel.ExchangeDeclare(textBoxExchange.Text, ExchangeType.Topic);
+                //m_InChannel.QueueBind(textBoxInQuene.Text, textBoxExchange.Text, textBoxRouteKey.Text, null);
+                m_InChannel.BasicQos(0, 1, false);
+
                 m_InConsumer = new EventingBasicConsumer(m_InChannel);
-                m_InChannel.BasicConsume(textBoxInQuene.Text, true, m_InConsumer);
+                m_InChannel.BasicConsume(textBoxInQuene.Text, false, m_InConsumer);
                 m_InConsumer.Received += _InConsumer_Received;
             }
             catch (Exception ex)
@@ -133,6 +124,19 @@ namespace mmMQEmitter
             return true;
         }
 
+        //
+        private void _SendBody()
+        {
+            if (m_bIsMQConnect == false) return;
+
+            m_OutChannel.BasicPublish(exchange: textBoxExchange.Text,
+                                     routingKey: textBoxRouteKey.Text,
+                                     basicProperties: null,
+                                     body: Encoding.UTF8.GetBytes(textBoxBody.Text));
+
+            _Log("Send body");
+        }
+
         private void _InConsumer_Received(object sender, BasicDeliverEventArgs e)
         {
             try
@@ -140,7 +144,9 @@ namespace mmMQEmitter
                 var body = e.Body;
                 var message = Encoding.UTF8.GetString(body.ToArray());
 
-                _Log("Received : " + message);
+                _Log($"Received : [{message}] RouteKey : [{e.RoutingKey}]");
+
+                m_InChannel.BasicAck(e.DeliveryTag, false);
             }
             catch (Exception ex)
             {
@@ -184,6 +190,7 @@ namespace mmMQEmitter
             listBoxLog.Invoke(new EventHandler((obj, evt) =>
             {
                 listBoxLog.Items.Add(strText);
+                listBoxLog.SelectedIndex = listBoxLog.Items.Count - 1;
             }));
         }
 
@@ -207,7 +214,11 @@ namespace mmMQEmitter
         //
         private void timer1_Tick(object sender, EventArgs e)
         {
+            timer1.Stop();
+            
             _SendBody();
+
+            timer1.Start();
         }
 
         private void buttonQueneNameExchange_Click(object sender, EventArgs e)
@@ -224,6 +235,11 @@ namespace mmMQEmitter
 
             textBoxInQuene.Text = textBoxOutQuene.Text;
             textBoxOutQuene.Text = n;
+        }
+
+        private void listBoxLog_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Clipboard.SetText(listBoxLog.SelectedItem.ToString());
         }
     }
 }
